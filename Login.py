@@ -43,7 +43,7 @@ def Identity(app):
     Close_From_Identity.grid(row = 9 , column = 0 , padx = 150)
 
 def Username_Password(app):
-    global une , pe , ce , Back_From_Username_Password , Username_Password_Submission , Close_From_Username_Password
+    global unl , une , pl , pe , cl , ce , Back_From_Username_Password , Username_Password_Submission , Close_From_Username_Password
     unl = ttk.Label(app , text = "لطفا نام کاربری خود را وارد نمایید" , font = ("Calibri" , 10))
     unl.grid(row = 0 , column = 0 , padx = 270 , pady = 10)
     une = ttk.Entry(app , width = 30)
@@ -56,9 +56,9 @@ def Username_Password(app):
     cl.grid(row = 4 , column = 0 , padx = 270 , pady = 10)
     ce = ttk.Entry(app , width = 30)
     ce.grid(row = 5 , column = 0 , padx = 270)
-    Username_Password_Submission = ttk.Button(app , text = "ارسال" , width = 10 , style = "success.Link.TButton" , command = Username_Password_Mechanism2)
+    Username_Password_Submission = ttk.Button(app , text = "ارسال" , width = 10 , style = "success.Link.TButton" , command = Username_Password_Mechanism1)
     Username_Password_Submission.grid(row = 6 , column = 0)
-    Back_From_Username_Password = ttk.Button(app , text = "بازگشت به صفحه قبل" , width = 20 , style = "success.Link.TButton" , command = Username_Password_Mechanism1)
+    Back_From_Username_Password = ttk.Button(app , text = "بازگشت به صفحه قبل" , width = 20 , style = "success.Link.TButton" , command = Username_Password_Mechanism2)
     Back_From_Username_Password.grid(row = 7 , column = 0 , pady = 20)
     Close_From_Username_Password = ttk.Button(app , text = "خروج از پلتفرم" , width = 30 , style = "success.Link.TButton" , command = Username_Password_Mechanism3)
     Close_From_Username_Password.grid(row = 8 , column = 0)
@@ -161,9 +161,18 @@ def Identity_Mechanism3():
 def Username_Password_Mechanism1():
     pass
 def Username_Password_Mechanism2():
-    pass
+    unl.grid_forget()
+    une.grid_forget()
+    pl.grid_forget()
+    pe.grid_forget()
+    cl.grid_forget()
+    ce.grid_forget()
+    Back_From_Username_Password.grid_forget()
+    Username_Password_Submission.grid_forget()
+    Close_From_Username_Password.grid_forget()
+    Identity(Account_Manager)
 def Username_Password_Mechanism3():
-    pass
+    Account_Manager.destroy()
 
 #*********
 def Gate_Mechanism1():
