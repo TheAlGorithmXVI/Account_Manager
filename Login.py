@@ -125,7 +125,23 @@ def Main_Menu_Mechanism3():
 
 #*********
 def Identity_Mechanism1():
-    pass
+    global FNE , LNE ,EAE
+    FNE = fne.get()
+    LNE = lne.get()
+    EAE = eae.get()
+    if len(FNE) == 0 or len(LNE) == 0 or len(EAE) == 0:
+        messagebox.showerror("اخطار" , "کاربر گرامی: لطفا تمامی قسمت های مذکور را تکمیل نمایید")
+    else:
+        fnl.grid_forget()
+        fne.grid_forget()
+        lnl.grid_forget()
+        lne.grid_forget()
+        eal.grid_forget()
+        eae.grid_forget()
+        Next_From_Identity.grid_forget()
+        Back_From_Identity.grid_forget()
+        Close_From_Identity.grid_forget()
+        Username_Password(Account_Manager)   
 def Identity_Mechanism2():
     fnl.grid_forget()
     fne.grid_forget()
@@ -137,7 +153,7 @@ def Identity_Mechanism2():
     Back_From_Identity.grid_forget()
     Close_From_Identity.grid_forget()
     Main_Menu(Account_Manager)
-    
+
 def Identity_Mechanism3():
     Account_Manager.destroy()
 
