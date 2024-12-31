@@ -159,7 +159,35 @@ def Identity_Mechanism3():
 
 #*********
 def Username_Password_Mechanism1():
-    pass
+    global UNE , PE , CE
+    UNE = une.get()
+    PE = pe.get()
+    CE = ce.get()
+    if len(UNE) <= 7:
+        messagebox.showerror("اخطار" , "نام کاربری باید حداقل شامل 8 کاراکتر باشد")
+    else:
+        Permission = 0
+        with open("DataBase.csv" , "r" , newline = "") as database:
+            db = csv.reader(database)
+            DB = list(db)
+            for i in DB:
+                if str(i[3]) == str(UNE):
+                    Permission = 1
+                    break
+            database.close()
+
+            if Permission == 1:
+                messagebox.showerror("اخطار" , "نام کاربری مد نظر شما قبلا انتخاب گردیده است. لطفا نام کاربری دیگری وارد نمایید")
+                une.delet(0 , ttk.END)
+                pe.delet(0 , ttk.END)
+                ce.delet(0 , ttk.END)
+            if Permission == 0:
+                
+                with open("DataBase.csv" , "a" , newline = "" , encoding = "utf-8") as record:
+                    Record = csv.writer(record)
+                    Record.writerow([FNE , LNE , EAE , UNE , PE])
+
+
 def Username_Password_Mechanism2():
     unl.grid_forget()
     une.grid_forget()
@@ -213,3 +241,6 @@ Account_Manager.geometry("800x500+500+250")
 #The Program is now ready to start...
 Main_Menu(Account_Manager)
 Account_Manager.mainloop()
+# with open("DataBase.csv" , "r" , newline = "") as file:
+#     s = csv.reader(file)
+#     print(list(s))    
