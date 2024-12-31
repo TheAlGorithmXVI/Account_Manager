@@ -80,21 +80,21 @@ def Gate(app):
     Return_Main_Menu = ttk.Button(app , text = "بازگشت به منوی اصلی" , width = 30 , style = "success.Link.TButton" , command = Gate_Mechanism3)
     Return_Main_Menu.grid(row = 9 , column = 0 , padx = 270)
 
-def Verification_Result_Successful(app):
+def Verification_Result_Successfull(app):
     global Result_Successfull , Which_Operation1 , VRS_Main_Menu , VRS_Close
-    Result_Successful = ttk.Label(app , text = "کاربر گرامی با موفقیت وارد پلتفرم گردید" , font = ("Calibri" , 10))
-    Result_Successful.grid(row = 2 , column = 0 , padx = 270 , pady = 50)
-    Which_Operation = ttk.Label(app , text = "لطفا یکی از گزینه های زیر را انتخاب نمایید" , font = ("Calibri" , 10))
-    Which_Operation.grid(row = 3 , column = 0 , padx = 270 , pady = 20)
+    Result_Successfull = ttk.Label(app , text = "کاربر گرامی با موفقیت وارد پلتفرم گردید" , font = ("Calibri" , 10))
+    Result_Successfull.grid(row = 2 , column = 0 , padx = 270 , pady = 50)
+    Which_Operation1 = ttk.Label(app , text = "لطفا یکی از گزینه های زیر را انتخاب نمایید" , font = ("Calibri" , 10))
+    Which_Operation1.grid(row = 3 , column = 0 , padx = 270 , pady = 20)
     VRS_Main_Menu = ttk.Button(app , text = "بازگشت به منوی اصلی" , width = 30 , style = "success.Link.TButton" , command = VRS_Mechanism1)
     VRS_Main_Menu.grid(row = 4 , column = 0 ,padx = 270 , pady = 20)
     VRS_Close = ttk.Button(app , text = "خروج از پلتفرم" , width = 30 , style = "success.Link.TButton" , command = VRS_Mechanism2)
     VRS_Close.grid(row = 5 , column = 0 , padx = 270 , pady = 20)
 
-def Verification_Result_Unsuccessful(app):
+def Verification_Result_Unsuccessfull(app):
     global Result_Unsuccessfull , Which_Operation2 , VRU_Main_Menu , VRU_Close , VRU_Try_Again
-    Result_Unsuccessful = ttk.Label(app , text = "متاسفانه کاربری با مشخصات وارد شده در سیستم یافت نشد" , font = ("Calibri" , 10))
-    Result_Unsuccessful.grid(row = 2 , column = 0 , padx = 240 , pady = 50)
+    Result_Unsuccessfull = ttk.Label(app , text = "متاسفانه کاربری با مشخصات وارد شده در سیستم یافت نشد" , font = ("Calibri" , 10))
+    Result_Unsuccessfull.grid(row = 2 , column = 0 , padx = 240 , pady = 50)
     Which_Operation2 = ttk.Label(app , text = "لطفا یکی از گزینه های زیر را انتخاب نمایید" , font = ("Calibri" , 10))
     Which_Operation2.grid(row = 3 , column = 0 , padx = 240 , pady = 20)
     VRU_Try_Again = ttk.Button(app , text = "تلاش مجدد" , width = 30 , style = "success.Link.TButton" , command = VRU_Mechanism1)
@@ -141,7 +141,8 @@ def Identity_Mechanism1():
         Next_From_Identity.grid_forget()
         Back_From_Identity.grid_forget()
         Close_From_Identity.grid_forget()
-        Username_Password(Account_Manager)   
+        Username_Password(Account_Manager)  
+
 def Identity_Mechanism2():
     fnl.grid_forget()
     fne.grid_forget()
@@ -217,17 +218,16 @@ def Username_Password_Mechanism1():
                                 Record.writerow([FNE , LNE , EAE , UNE , PE])
                                 record.close()
                             messagebox.showinfo("گزارش" , "کاربر گرامی: ثبت نام شما با موفقیت انجام گردید")
-                        unl.grid_forget()
-                        une.grid_forget()
-                        pl.grid_forget()
-                        pe.grid_forget()
-                        cl.grid_forget()
-                        ce.grid_forget()
-                        Username_Password_Submission.grid_forget()
-                        Back_From_Username_Password.grid_forget()
-                        Close_From_Username_Password.grid_forget()
-                        Main_Menu(Account_Manager)        
-
+                            unl.grid_forget()
+                            une.grid_forget()
+                            pl.grid_forget()
+                            pe.grid_forget()
+                            cl.grid_forget()
+                            ce.grid_forget()
+                            Username_Password_Submission.grid_forget()
+                            Back_From_Username_Password.grid_forget()
+                            Close_From_Username_Password.grid_forget()
+                            Main_Menu(Account_Manager)        
 
 def Username_Password_Mechanism2():
     unl.grid_forget()
@@ -245,25 +245,78 @@ def Username_Password_Mechanism3():
 
 #*********
 def Gate_Mechanism1():
-    pass
+    global GUN , GP
+    Allow = 0
+    GUN = gune.get()
+    GP = gpe.get()
+    with open("DataBase.csv" , "r" , newline = "") as Verification:
+        VRFY = csv.reader(Verification)
+        VR = list(VRFY)
+        for information in VR:
+            if information[3] == GUN and information[4] == GP:
+                Allow = 1
+                break
+        Verification.close()
+    if Allow == 1:    
+        gunl.grid_forget()
+        gune.grid_forget()
+        gpl.grid_forget()
+        gpe.grid_forget()
+        Gate_Submit.grid_forget()
+        Close_From_Gate.grid_forget()
+        Return_Main_Menu.grid_forget()
+        Verification_Result_Successfull(Account_Manager)
+    if Allow == 0:
+        gunl.grid_forget()
+        gune.grid_forget()
+        gpl.grid_forget()
+        gpe.grid_forget()
+        Gate_Submit.grid_forget()
+        Close_From_Gate.grid_forget()
+        Return_Main_Menu.grid_forget()
+        Verification_Result_Unsuccessfull(Account_Manager)
+
 def Gate_Mechanism2():
-    pass
+    Account_Manager.destroy()
+
 def Gate_Mechanism3():
-    pass
+    gunl.grid_forget()
+    gune.grid_forget()
+    gpl.grid_forget()
+    gpe.grid_forget()
+    Close_From_Gate.grid_forget()
+    Gate_Submit.grid_forget()
+    Return_Main_Menu.grid_forget()
+    Main_Menu(Account_Manager)
 
 #*********
 def VRS_Mechanism1():
-    pass
+    Result_Successfull.grid_forget()
+    Which_Operation1.grid_forget()
+    VRS_Main_Menu.grid_forget()
+    VRS_Close.grid_forget()
+    Main_Menu(Account_Manager)
+
 def VRS_Mechanism2():
-    pass
+    Account_Manager.destroy()
 
 #*********
 def VRU_Mechanism1():
-    pass
+    Result_Unsuccessfull.grid_forget()
+    Which_Operation2.grid_forget()
+    VRU_Try_Again.grid_forget()
+    VRU_Close.grid_forget()
+    VRU_Main_Menu.grid_forget()
+    Gate(Account_Manager)
 def VRU_Mechanism2():
-    pass
+    Result_Unsuccessfull.grid_forget()
+    Which_Operation2.grid_forget()
+    VRU_Try_Again.grid_forget()
+    VRU_Close.grid_forget()
+    VRU_Main_Menu.grid_forget()
+    Main_Menu(Account_Manager)
 def VRU_Mechanism3():
-    pass
+    Account_Manager.destroy()
 ############################################################
 #Framework Configuration...  
 Account_Manager = ttk.Window(themename = "cyborg")
@@ -281,7 +334,4 @@ Account_Manager.geometry("800x500+500+250")
 ###########################################################
 #The Program is now ready to start...
 Main_Menu(Account_Manager)
-Account_Manager.mainloop()
-# with open("DataBase.csv" , "r" , newline = "") as file:
-#     s = csv.reader(file)
-#     print(list(s))    
+Account_Manager.mainloop()   
