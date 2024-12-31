@@ -107,7 +107,11 @@ def Verification_Result_Unsuccessful(app):
 #############################################################
 #Mechanism Methods...
 def Main_Menu_Mechanism1():
-    pass
+    Request.grid_forget()
+    Sign_Up.grid_forget()
+    Sign_In.grid_forget()
+    Exit_From_Main_Menu.grid_forget()
+    Identity(Account_Manager)
 def Main_Menu_Mechanism2():
     pass
 def Main_Menu_Mechanism3():
