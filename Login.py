@@ -73,7 +73,7 @@ def Gate(app):
     gpl.grid(row = 5 , column = 0 , padx = 270)
     gpe = ttk.Entry(app , width = 30)
     gpe.grid(row = 6 , column = 0 , padx = 270)
-    Gate_Submit = ttk.Button(app , text = "ارسال" , width = 10 , style = "success.Link.TButton" , command = Gate_Mechanism1)
+    Gate_Submit = ttk.Button(app , text = "ورود به حساب کاربری" , width = 20 , style = "success.Link.TButton" , command = Gate_Mechanism1)
     Gate_Submit.grid(row = 7 , column = 0 , padx = 270)
     Close_From_Gate = ttk.Button(app , text = "خروج از پلتفرم" , width = 20 , style = "success.Link.TButton" , command = Gate_Mechanism2)
     Close_From_Gate.grid(row = 8 , column = 0 , padx = 270)
@@ -112,8 +112,14 @@ def Main_Menu_Mechanism1():
     Sign_In.grid_forget()
     Exit_From_Main_Menu.grid_forget()
     Identity(Account_Manager)
+
 def Main_Menu_Mechanism2():
-    pass
+     Request.grid_forget()
+     Sign_Up.grid_forget()
+     Sign_In.grid_forget()
+     Exit_From_Main_Menu.grid_forget()
+     Gate(Account_Manager)
+    
 def Main_Menu_Mechanism3():
     Account_Manager.destroy()
 
@@ -121,9 +127,19 @@ def Main_Menu_Mechanism3():
 def Identity_Mechanism1():
     pass
 def Identity_Mechanism2():
-    pass
+    fnl.grid_forget()
+    fne.grid_forget()
+    lnl.grid_forget()
+    lne.grid_forget()
+    eal.grid_forget()
+    eae.grid_forget()
+    Next_From_Identity.grid_forget()
+    Back_From_Identity.grid_forget()
+    Close_From_Identity.grid_forget()
+    Main_Menu(Account_Manager)
+    
 def Identity_Mechanism3():
-    pass
+    Account_Manager.destroy()
 
 #*********
 def Username_Password_Mechanism1():
@@ -140,10 +156,14 @@ def Gate_Mechanism2():
     pass
 def Gate_Mechanism3():
     pass
+
+#*********
 def VRS_Mechanism1():
     pass
 def VRS_Mechanism2():
     pass
+
+#*********
 def VRU_Mechanism1():
     pass
 def VRU_Mechanism2():
