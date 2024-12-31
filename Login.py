@@ -178,14 +178,55 @@ def Username_Password_Mechanism1():
 
             if Permission == 1:
                 messagebox.showerror("اخطار" , "نام کاربری مد نظر شما قبلا انتخاب گردیده است. لطفا نام کاربری دیگری وارد نمایید")
-                une.delet(0 , ttk.END)
-                pe.delet(0 , ttk.END)
-                ce.delet(0 , ttk.END)
+                une.delete(0 , ttk.END)
+                pe.delete(0 , ttk.END)
+                ce.delete(0 , ttk.END)
             if Permission == 0:
-                
-                with open("DataBase.csv" , "a" , newline = "" , encoding = "utf-8") as record:
-                    Record = csv.writer(record)
-                    Record.writerow([FNE , LNE , EAE , UNE , PE])
+                if len(PE) <= 7:
+                    messagebox.showerror("اخطار" , "رمز عبور باید دارای حداقل 8 کاراکتر باشد")
+                    pe.delete(0 , ttk.END)
+                    ce.delete(0 , ttk.END)
+                else:
+                    Upper = {"A" , "B" , "C" , "D" , "E" , "F" , "G" , "H" , "I" , "J" , "K" , "L" , "M" , "N" , "O" , "P" , "Q" , "R" , "S" , "T" , "U" , "V" , "W" , "X" , "Y" , "Z"}
+                    Lower = {"a" , "b" , "c" , "d" , "e" , "f" , "g" , "h" , "i" , "j" , "k" , "l" , "m" , "n" , "o" , "p" , "q" , "r" , "s" , "t" , "u" , "v" , "w" , "x" , "y" , "z"}
+                    Numbers = {"0" , "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9"}
+                    Exceptionals = {"~" , "!" , "@" , "#" , "$" , "%" , "^" , "&" , "*" , "(" , ")" , "+" , "=" , "[" , "]" , "{" , "}" , "/"  , ","}
+                    upper_count = 0
+                    lower_count = 0
+                    numbers_count = 0
+                    exceptional_count = 0
+
+                    for character in PE:
+                        if character in Upper:
+                            upper_count += 1
+                        if character in Lower:
+                            lower_count += 1
+                        if character in Numbers:
+                            numbers_count += 1
+                        if character in Exceptionals:
+                            exceptional_count += 1
+
+                    if upper_count == 0 or lower_count == 0 or numbers_count == 0 or exceptional_count == 0:
+                        messagebox.showerror("اخطار" , "رمز عبور انتخابی باید شامل حروف کوچک و حروف بزرگ و اعداد و کاراکترهای استثنایی باشد")  
+                    else:
+                        if PE != CE:
+                            messagebox.showerror("اخطار" , "عدم مطابت رمزهای عبور مشاهده گردید")
+                        else:
+                            with open("DataBase.csv" , "a" , newline = "" , encoding = "utf-8") as record:
+                                Record = csv.writer(record)
+                                Record.writerow([FNE , LNE , EAE , UNE , PE])
+                                record.close()
+                            messagebox.showinfo("گزارش" , "کاربر گرامی: ثبت نام شما با موفقیت انجام گردید")
+                        unl.grid_forget()
+                        une.grid_forget()
+                        pl.grid_forget()
+                        pe.grid_forget()
+                        cl.grid_forget()
+                        ce.grid_forget()
+                        Username_Password_Submission.grid_forget()
+                        Back_From_Username_Password.grid_forget()
+                        Close_From_Username_Password.grid_forget()
+                        Main_Menu(Account_Manager)        
 
 
 def Username_Password_Mechanism2():
